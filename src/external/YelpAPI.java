@@ -91,6 +91,7 @@ public class YelpAPI {
       term = DEFAULT_TERM;
     }
     term = urlEncodeHelper(term);
+    //generate url in query
     String query = String.format("term=%s&latitude=%s&longitude=%s&limit=%s", term, latitude,
         longitude, SEARCH_LIMIT);
     String url = API_HOST + SEARCH_PATH;
@@ -107,11 +108,13 @@ public class YelpAPI {
       int responseCode = connection.getResponseCode();
       System.out.println("\nSending 'GET' request to URL : " + url + "?" + query);
       System.out.println("Response Code : " + responseCode);
-
+      
+      //getInputStream: return inputStream that reads response data from open connection
+      //then create bufferedReader to help read text from a character-input stream.
       BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
       String inputLine;
       StringBuilder response = new StringBuilder();
-
+      //Append response data to StringBuilder line by line
       while ((inputLine = in.readLine()) != null) {
         response.append(inputLine);
       }
@@ -149,6 +152,8 @@ public class YelpAPI {
       e.printStackTrace();
     }
   }
+  
+  
   // Convert JSONArray to a list of item objects.
   private List<Item> getItemList(JSONArray array) throws JSONException {
     List<Item> list = new ArrayList<>();

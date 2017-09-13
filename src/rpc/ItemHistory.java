@@ -58,7 +58,7 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		try {
+		try{
 			JSONObject input = RpcHelper.readJsonObject(request);
 			String userId = input.getString("user_id");
 			JSONArray array = (JSONArray) input.get("favorite");
@@ -70,7 +70,7 @@ public class ItemHistory extends HttpServlet {
 			}
 			conn.setFavoriteItems(userId, histories);
 			RpcHelper.writeJsonObject(response, new JSONObject().put("result", "SUCCESS"));
-		} catch (JSONException e) {
+		}catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}

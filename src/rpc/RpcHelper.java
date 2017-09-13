@@ -3,7 +3,6 @@ package rpc;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,8 +35,10 @@ public class RpcHelper {
 	public static void writeJsonObject(HttpServletResponse response, JSONObject obj) {
 		try {
 			response.setContentType("application/json");
+			//getWriter() function returns a PrintWriter Object to send character to client
 			PrintWriter out = response.getWriter();
 			out.print(obj);
+			//flush use for commit the response
 			out.flush();
 			out.close();
 		} catch (Exception e) {
